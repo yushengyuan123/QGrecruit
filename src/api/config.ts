@@ -34,23 +34,14 @@ _Request.interceptors.request.use((config) => {
 /**
  * 统一对返回的数据进行过滤
  */
-_Request.interceptors.response.use((result) => {
+_Request.interceptors.response.use((result: any) => {
     // 当没有前面的问题的时候，返回请求对象的数据
     //拿取头部证书
-    if(!localStorage.getItem("AuthorizationAdmin")) {/*-
 
 
 
 
 
-
-
-
-
-
-
-
-    }
     return result.data;
 }, (error) => {
     //  console.log(error)

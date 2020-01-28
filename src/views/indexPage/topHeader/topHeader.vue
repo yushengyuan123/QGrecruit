@@ -1,6 +1,6 @@
 <style scoped>
     .header-container {
-        height: 6rem;
+        height: 5rem;
     }
 
     .QG-image {

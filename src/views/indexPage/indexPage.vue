@@ -1,6 +1,5 @@
 <style scoped>
     .index-container {
-        height: 100vh;
     }
 
 </style>
