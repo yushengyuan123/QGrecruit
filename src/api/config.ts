@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let baseUrl = '';// 不知道能不能写服务器真实地址
+let baseUrl = 'http://www.cxkball.club/api/admin/';// 不知道能不能写服务器真实地址
 
 
 // if (process.env.NODE_ENV === 'production') {

@@ -235,12 +235,17 @@
             </div>
         </div>
 
-        <div class="submit-btn">提交</div>
+        <div class="submit-btn" @click="SubmitInformation">提交</div>
     </div>
 </template>
 
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
+    import store from '@/store';
+    import StuInfoModule from '@/store/modules/StuInfoModule';
+    import { getModule } from 'vuex-module-decorators';
+
+    const stuInfo = getModule(StuInfoModule, store);
 
     @Component({
         components: {
@@ -252,5 +257,16 @@
         sex: string = ''
         direction: string = ''
         isObey: string = '是'
+
+        SubmitInformation() {
+            console.log('我点击了')
+            let data = {
+                "username":"123456",
+                "password":"123456"
+            }
+            stuInfo.SubMitStuInfo(JSON.stringify(data)).then(res => {
+                console.log(res)
+            })
+        }
     }
 </script>
