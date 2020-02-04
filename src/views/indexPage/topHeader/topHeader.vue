@@ -1,10 +1,9 @@
-<style scoped>
+<style lang="scss" scoped>
     .header-container {
-        height: 5rem;
+        padding-top: 1rem;
     }
 
     .QG-image {
-        height: 3rem;
         width: 40%;
         margin: auto;
         background-image: url("../../../assets/QGlogo.png");
@@ -12,12 +11,33 @@
         background-repeat: no-repeat;
         background-size: 30%;
         padding-top: 1rem;
+        overflow: visible;
+        @media screen and (max-width: 320px){
+            height: 2rem;
+        }
+        @media screen and (min-width: 321px) and (max-width: 741px){
+            height: 3rem;
+        }
+        @media screen and (min-width: 742px) and (max-width: 1024px){
+            height: 7rem;
+        }
     }
 
     .title {
-        height: 2rem;
-        font-size: 1.2rem;
+        $height: 600px;
         font-weight: bold;
+        @media screen and (max-width: 320px){
+            font-size: 16px;
+            line-height: 2rem;
+        }
+        @media screen and (min-width: 321px) and (max-width: 741px){
+            font-size: 19.2px;
+            line-height: 2rem;
+        }
+        @media screen and (min-width: 742px) and (max-width: 1024px){
+            font-size: 30px;
+            line-height: 3rem;
+        }
     }
 </style>
 
