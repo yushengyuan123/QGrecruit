@@ -5,6 +5,8 @@
 </template>
 
 <script lang="ts">
+    //@ts-ignore
+    import $ from 'jquery';
     console.log('你好，同学！')
     console.log('这里是QG Studio from GDUT')
     console.log('前端组期待你的加入，祝你好运！')
@@ -16,17 +18,6 @@
         components: {},
     })
     export default class App extends Vue {
-        mounted(): void {
-            this.backToTop()
-        }
-
-        backToTop() {
-            setTimeout(() => {
-                const scrollHeight =
-                    document.documentElement.scrollTop || document.body.scrollTop || 0;
-                window.scrollTo(0, Math.max(scrollHeight - 1, 0));
-            }, 100);
-        }
     }
 </script>
 
@@ -44,6 +35,18 @@
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
         color: #2c3e50;
+        @media screen and (min-width: 742px) {
+            background-image: url('./assets/ipadbg.png');//此为图片地址
+        }
+        @media screen and (max-width: 741px) {
+            background-image: url('./assets/phonebg.png');//此为图片地址
+        }
+
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        -moz-background-size: 100% 100%;
+        -webkit-background-size: 100% 100%;
+
     }
 
     body {

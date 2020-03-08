@@ -1,15 +1,14 @@
 import axios from 'axios';
 
-let baseUrl = 'http://www.cxkball.club/api/admin/';// 不知道能不能写服务器真实地址
+let baseUrl: string = ''
 
-
-// if (process.env.NODE_ENV === 'production') {
-//     // 生产环境下使用真实路径
-//     baseUrl = 'http://47.106.213.116/api';
-// } else {
-//     // 非生产环境下，都使用代理服务器
-//     baseUrl = '/api/api';
-// }
+if (process.env.NODE_ENV === 'production') {
+    // 生产环境下使用真实路径
+    baseUrl = 'http://recruit.qgailab.com/api';
+} else {
+    // 非生产环境下，都使用代理服务器
+    baseUrl = '/api';
+}
 
 // @ts-ignore
 const _Request = axios.create({
@@ -61,7 +60,7 @@ export class Request {
     }
 
     post(url: string, data: any) {
-        return _Request.post(this.commonUrl + url, data);
+        return _Request.post(this.commonUrl + url, JSON.stringify(data));
     }
 
     upload(url: string, data: any) {

@@ -13,14 +13,14 @@ function getResData(res: any): {
     if(res.code == 1) {
         return {
             isSuccess: true,
-            data: res.data ? res.data : null,
-            message: res.message ? res.message : 'null'
+            data: res.data,
+            message: res.message
         }
     } else {
         notice.ErrorNotice(res.message)
         return {
             isSuccess: false,
-            message: res.message ? res.message : null
+            message: res.message
         }
     }
 }

@@ -4,6 +4,7 @@ import {getResultResData} from "@/utils/Request";
 import {stuInfoDeal} from "@/api/submitInfo";
 @Module({name: 'StuInfoModule', namespaced: true, stateFactory: true})
 export default class StuInfoModule extends VuexModule {
+
     @Action
     public async SubMitStuInfo(data: any ) {
         //失败的时候向直接输出错误信息
@@ -12,4 +13,10 @@ export default class StuInfoModule extends VuexModule {
         }
         return getResultResData(await  stuInfoDeal.SubmitStuInfo(data));
     }
+
+
+    // @Action
+    // public async pythonTestReq() {
+    //     return getResultResData(await  stuInfoDeal.pythonTest());
+    // }
 }

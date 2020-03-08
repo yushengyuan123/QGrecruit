@@ -9,6 +9,11 @@ class Notice {
         // @ts-ignore
         Message.error(description)
     }
+
+    Success(description: string) {
+        // @ts-ignore
+        Message.success(description)
+    }
 }
 
 export const notice = new Notice()

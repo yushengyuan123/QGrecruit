@@ -24,27 +24,22 @@
     }
 
     .title {
-        $height: 600px;
-        font-weight: bold;
-        @media screen and (max-width: 320px){
-            font-size: 16px;
-            line-height: 2rem;
+        @media screen and (max-width: 741px){
+            height: 2.5rem;
         }
-        @media screen and (min-width: 321px) and (max-width: 741px){
-            font-size: 19.2px;
-            line-height: 2rem;
+        @media screen and (min-width: 742px){
+            height: 4rem;
         }
-        @media screen and (min-width: 742px) and (max-width: 1024px){
-            font-size: 30px;
-            line-height: 3rem;
-        }
+        height: 2.5rem;
+        width: 80%;
+        margin: auto;
     }
 </style>
 
 <template>
     <div class="header-container">
         <div class="QG-image"></div>
-        <div class="title">QG工作室2020年训练营招募报名表</div>
+        <img src="../../../assets/form_title.png" alt="title" class="title">
     </div>
 </template>
 
