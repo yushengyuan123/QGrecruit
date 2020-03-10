@@ -36,11 +36,6 @@ _Request.interceptors.request.use((config) => {
 _Request.interceptors.response.use((result: any) => {
     // 当没有前面的问题的时候，返回请求对象的数据
     //拿取头部证书
-
-
-
-
-
     return result.data;
 }, (error) => {
     //  console.log(error)

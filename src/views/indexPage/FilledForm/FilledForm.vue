@@ -44,7 +44,6 @@
 
     .fill-input-container {
         @include inline_block;
-        height: 2.5rem;
         padding: 0.25rem 0 0.25rem 0;
         color: white;
         @media screen and (max-width: 320px) {
@@ -59,12 +58,23 @@
     }
 
     .fill-input {
-        border: 1px solid transparent;
-        border-radius: 4px;
+        border: 0;
+        border-bottom: 1px solid rgba(241,241,241,1);
         vertical-align: top;
         outline: none;
         width: 100%;
-        height: 100%;
+        height: 2rem;
+        background:rgba(255,255,255,0);
+        color: white;
+    }
+
+    .fill-input-wrong {
+        border: 0;
+        border-bottom: 1px solid red;
+        vertical-align: top;
+        outline: none;
+        width: 100%;
+        height: 2rem;
         background:rgba(255,255,255,0);
         color: white;
     }
@@ -124,14 +134,25 @@
         margin: 1rem auto 0 auto;
         color: white;
     }
+    
+    .warning {
+        font: {
+            family: 'Avenir', Helvetica, Arial, sans-serif;
+            size: 13px;
+        };
+        width: 200px;
+        color: red;
+    }
 </style>
 
 <template>
     <div class="form-container">
+        <alert @SubmitInformation="SubmitInformation" @cancel="SubmitInformation" v-if="isShow"></alert>
         <div class="row-container">
             <div class="stu-name">姓名</div>
             <div class="fill-input-container" style="width: 50%">
-                <input type="text" class="fill-input" v-model="basicInfo.name" @focus='borderHas' @blur='borderDis'>
+                <input type="text" class="fill-input" v-model="basicInfo.name" :style="{'border-bottom': warning.name == '' ? '1px solid rgba(241,241,241,1)' : '1px solid red'}" @blur="check('name')">
+                <div class="warning">{{warning.name}}</div>
             </div>
         </div>
 
@@ -146,6 +167,7 @@
                         <span class="label-span">女</span>
                     </Radio>
                 </RadioGroup>
+                <div class="warning">{{this.warning.sex}}</div>
             </div>
         </div>
 
@@ -160,55 +182,63 @@
                         <span class="label-span">否</span>
                     </Radio>
                 </RadioGroup>
+                 <div class="warning">{{this.warning.fail}}</div>
             </div>
         </div>
 
         <div class="row-container">
             <div class="stu-name">学号</div>
             <div class="fill-input-container" style="width: 40%">
-                <input type="text" class="fill-input" v-model="basicInfo.number" @focus='borderHas' @blur='borderDis'>
+                <input type="text" class="fill-input" v-model="basicInfo.number" :style="{'border-bottom': warning.number == '' ? '1px solid rgba(241,241,241,1)' : '1px solid red'}" @blur="check('number')">
+                <div class="warning">{{warning.number}}</div>
             </div>
         </div>
 
         <div class="row-container">
             <div class="stu-name">绩点</div>
             <div class="fill-input-container" style="width: 40%">
-                <input type="text" class="fill-input" v-model="basicInfo.allScore" placeholder="例:4.0" @focus='borderHas' @blur='borderDis'>
+                <input type="text" class="fill-input" v-model="basicInfo.allScore" placeholder="例:4.0" :style="{'border-bottom': warning.allScore == '' ? '1px solid rgba(241,241,241,1)' : '1px solid red'}" @blur="check('allScore')">
+                <div class="warning">{{warning.allScore}}</div>
             </div>
         </div>
 
         <div class="row-container">
             <div class="stu-name">年级</div>
             <div class="fill-input-container" style="width: 20%">
-                <input type="text" class="fill-input" v-model="basicInfo.grade" placeholder="例:19" @focus='borderHas' @blur='borderDis'>
+                <input type="text" class="fill-input" v-model="basicInfo.grade" placeholder="例:19" :style="{'border-bottom': warning.grade == '' ? '1px solid rgba(241,241,241,1)' : '1px solid red'}" @blur="check('grade')">
+                <div class="warning">{{warning.grade}}</div>
             </div>
         </div>
 
         <div class="row-container">
             <div class="stu-name">专业班级</div>
             <div class="fill-input-container" style="width: 50%">
-                <input type="text" class="fill-input" v-model="basicInfo.class" placeholder="例:软件工程1班" @focus='borderHas' @blur='borderDis'>
+                <input type="text" class="fill-input" v-model="basicInfo.class" placeholder="例:软件工程1班" :style="{'border-bottom': warning.class == '' ? '1px solid rgba(241,241,241,1)' : '1px solid red'}" @blur="check('class')">
+                <div class="warning">{{warning.class}}</div>
             </div>
         </div>
 
         <div class="row-container">
             <div class="stu-name">班级职务</div>
             <div class="fill-input-container" style="width: 50%">
-                <input type="text" class="fill-input" v-model="basicInfo.duty" placeholder="没有填无" @focus='borderHas' @blur='borderDis'>
+                <input type="text" class="fill-input" v-model="basicInfo.duty" placeholder="没有填无" :style="{'border-bottom': warning.duty == '' ? '1px solid rgba(241,241,241,1)' : '1px solid red'}" @blur="check('duty')">
+                <div class="warning">{{warning.duty}}</div>
             </div>
         </div>
 
         <div class="row-container">
             <div class="stu-name">手机</div>
             <div class="fill-input-container" style="width: 60%">
-                <input type="text" class="fill-input" v-model="basicInfo.phone" @focus='borderHas' @blur='borderDis'>
+                <input type="text" class="fill-input" v-model="basicInfo.phone" :style="{'border-bottom': warning.phone == '' ? '1px solid rgba(241,241,241,1)' : '1px solid red'}" @blur="check('phone')">
+                <div class="warning">{{warning.phone}}</div>
             </div>
         </div>
 
         <div class="row-container">
             <div class="stu-name">QQ</div>
             <div class="fill-input-container" style="width: 60%">
-                <input type="text" class="fill-input" v-model="basicInfo.qq" @focus='borderHas' @blur='borderDis'>
+                <input type="text" class="fill-input" v-model="basicInfo.qq" :style="{'border-bottom': warning.qq == '' ? '1px solid rgba(241,241,241,1)' : '1px solid red'}" @blur="check('qq')">
+                <div class="warning">{{warning.qq}}</div>
             </div>
         </div>
 
@@ -242,21 +272,24 @@
                     *设计组与其他六个方向的流程不同，笔试时除了黑色的签字笔请另外带上铅笔和橡皮擦。
                 </div>
                 <div style="font-size: 14px;font-family:Source Han Sans CN;">*7个方向只能填写一个。</div>
+                <div class="warning">{{this.warning.direction}}</div>
             </div>
         </div>
 
         <div class="row-container">
-            <div class="stu-name">参加其他学生科技团队,普通社团情况说明</div>
-            <div class="fill-input-container" style="width: 96%; padding: 0.25rem 2% 0.25rem 2%;height: 9rem;">
-                <textarea type="text" class="fill-input" style='background:rgba(255,255,255,0.1);border:1px solid rgba(188,188,188,1);' v-model="description.CommunityDes" @blur="backtoTop"></textarea>
+            <div class="stu-name" style="height: auto">参加普通社团和科技社团说明。</div>
+            <div class="fill-input-container" style="height: 10rem; width: 96%; padding: 0.25rem 2% 0.25rem 2%;">
+                <textarea type="text" class="fill-input" style='background:rgba(255,255,255,0.1);border:1px solid rgba(188,188,188,1);height:100%' v-model="description.CommunityDes" @blur="backtoTop('CommunityDes')"></textarea>
             </div>
+            <div class="warning" style="padding: 0.25rem 2%;">{{this.warning.CommunityDes}}</div>
         </div>
 
         <div class="row-container">
             <div class="stu-name" style="height: auto">请说一下大学四年的个人规划以及为什么希望加入QG工作室。</div>
             <div class="fill-input-container" style="height: 10rem; width: 96%; padding: 0.25rem 2% 0.25rem 2%;">
-                <textarea type="text" class="fill-input" style='background:rgba(255,255,255,0.1);border:1px solid rgba(188,188,188,1);' v-model="description.whyQG" @blur="backtoTop"></textarea>
+                <textarea type="text" class="fill-input" style='background:rgba(255,255,255,0.1);border:1px solid rgba(188,188,188,1);height:100%' v-model="description.whyQG" @blur="backtoTop('whyQG')"></textarea>
             </div>
+            <div class="warning" style="padding: 0.25rem 2%;">{{this.warning.whyQG}}</div>
         </div>
 
         <div class="submit-btn" @click="FormatCheck">提交</div>
@@ -273,31 +306,52 @@
     import {getModule} from "vuex-module-decorators";
     import {regular} from "@/utils/regular";
     import {stuInfoDeal} from "@/api/submitInfo" 
+    import {withoutContent} from '@/utils/fill'
+    import alert from "@/components/alert.vue"
+import { Notice } from 'view-design';
 
     const stuInfo = getModule(StuInfoModule, store);
 
     @Component({
-        components: {},
+        components: {
+            alert: alert
+        },
     })
 
     export default class FilledForm extends Vue {
+        isShow: boolean = false
         basicInfo: any = {
             name: "",
             sex: "",
             fail: '',
             number: "",
+            allScore: "",
             grade: "",
             class: "",
-            allScore: "",
+            duty: '',
             phone: "",
             qq: "",
-            duty: ''
         };
         description: any = {
             direction: "",
-            CommunityDes: "",
+            CommunityDes: '',
             whyQG: "",
         };
+        warning: any = {
+            name: '',
+            sex: '',
+            fail: '',
+            number: '',
+            allScore: '',
+            grade: '',
+            class: '',
+            duty: '',
+            phone: '',
+            qq: '',
+            direction: '',
+            CommunityDes: '',
+            whyQG: ''        
+        }
 
         //存放临时session方便刷新不用重新填写
         @Watch('basicInfo', {deep: true})
@@ -337,65 +391,104 @@
             }
         }
 
-        SubmitInformation() {
-            let data = {
-                stuId: this.basicInfo.number, //学号
-                name: this.basicInfo.name, //姓名
-                phone: this.basicInfo.phone, //手机
-                sex: this.basicInfo.sex, //性别
-                grade: this.basicInfo.grade, //年级
-                department: this.basicInfo.class, //专业班级
-                point: this.basicInfo.allScore, //绩点
-                qq: this.basicInfo.qq, //qq
-                group: this.description.direction, //组别
-                fail: this.basicInfo.fail, //是否挂科
-                plan: this.description.whyQG, //个人规划和为什么加入qg工作室
-                explain: this.description.CommunityDes, //参加其他学生科技团队/社团的情况说明
-            }
-            
-            stuInfoDeal.SubmitStuInfo(data).then((res: any) => {
-                if(res.isSuccess) {
-                    notice.Success(res.message)
+        SubmitInformation(data: boolean) {
+            this.isShow = false
+            if(data) {
+                let flag = false
+                for (let i in this.basicInfo) {
+                    let info = regular.Check(this.basicInfo[i], i)
+                    if (!regular.isNotNullTrim(this.basicInfo[i])) {
+                        this.warning[i] = '输入不能为空'
+                        flag = true
+                    } else if(info !== true) {
+                        this.warning[i] = info
+                        flag = true
+                    } else {
+                        this.warning[i] = ''
+                    }
                 }
-            })
+
+                for(let index in this.description) {
+                    let info = regular.Check(this.description[index], index)
+                    if (!regular.isNotNullTrim(this.description[index])) {
+                        this.warning[index] = '输入不能为空'
+                        flag = true
+                    } else if(info !== true) {
+                        this.warning[index] = info
+                        flag = true
+                    } else {
+                        this.warning[index] = ''
+                    }
+                }
+
+                if(flag) {
+                    notice.ErrorNotice('请正确填写信息')
+                    return 
+                }
+
+                let reqData = {
+                    stuId: this.basicInfo.number, //学号
+                    name: this.basicInfo.name, //姓名
+                    phone: this.basicInfo.phone, //手机
+                    duty: this.basicInfo.duty,
+                    sex: this.basicInfo.sex, //性别
+                    grade: this.basicInfo.grade, //年级
+                    department: this.basicInfo.class, //专业班级
+                    point: Number(this.basicInfo.allScore), //绩点
+                    qq: this.basicInfo.qq, //qq
+                    group: this.description.direction, //组别
+                    fail: this.basicInfo.fail == '是' ? true : false, //是否挂科
+                    plan: this.description.whyQG, //个人规划和为什么加入qg工作室
+                    explain: this.description.CommunityDes, //参加其他学生科技团队/社团的情况说明
+                }
+                            
+                stuInfoDeal.SubmitStuInfo(reqData).then((res: any) => {
+
+                })
+            }
+        }
+
+        check(prop: string) {
+            if(prop in this.basicInfo) {
+                let info = regular.Check(this.basicInfo[prop], prop)
+                if(!regular.isNotNullTrim(this.basicInfo[prop])) {
+                    this.warning[prop] = '输入不能为空'
+                } else if(info !== true) {
+                    this.warning[prop] = info
+                } else {
+                    this.warning[prop] = ''
+                }
+            } else {
+                let info = regular.Check(this.description[prop], prop)
+                if(!regular.isNotNullTrim(this.description[prop])) {
+                    this.warning[prop] = '输入不能为空'
+                } else if(info !== true) {
+                    this.warning[prop] = info
+                } else {
+                    this.warning[prop] = ''
+                }
+            }
         }
 
         //信息格式检查
         FormatCheck(): void {
-            for(let index in this.description) {
-                if (!regular.isNotNullTrim(this.description[index])) {
-                    notice.ErrorNotice('请补充完信息');
-                    return;
-                }
-            }
-
-            for (let i in this.basicInfo) {
-                if (!regular.isNotNullTrim(this.basicInfo[i])) {
-                    notice.ErrorNotice('请补充完信息');
-                    return;
-                }
-                if (!regular.phone(this.basicInfo.phone)) {
-                    notice.ErrorNotice("请输入正确的手机");
-                    return;
-                }
-            }
-            this.SubmitInformation();
+            this.isShow = true
         }
 
-        backtoTop() {
+        backtoTop(prop: string) {
              setTimeout(() => {
                   const scrollHeight =
                         document.documentElement.scrollTop || document.body.scrollTop || 0;
                         window.scrollTo(0, Math.max(scrollHeight - 1, 0));
             }, 300);
-        }
-
-        borderHas(elment: any) {
-            elment.target.style.borderBottom = "2px solid rgb(241,241,241,0.506)";
-        }
-
-        borderDis(e: any) {
-            e.target.style.borderBottom = "1px solid transparent";
+            let info = regular.Check(this.description[prop], prop)
+                if(!regular.isNotNullTrim(this.description[prop])) {
+                    this.warning[prop] = '输入不能为空'
+                } else if(info !== true) {
+                    this.warning[prop] = info
+                } else {
+                    this.warning[prop] = ''
+            }
         }
     }
 </script>

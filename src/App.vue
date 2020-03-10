@@ -11,7 +11,6 @@
     console.log('这里是QG Studio from GDUT')
     console.log('前端组期待你的加入，祝你好运！')
     console.log('No Quests, No Gains!')
-    console.log('Proudly created by Syan.Y')
 
     import {Component, Vue} from "vue-property-decorator";
     @Component({
@@ -28,6 +27,18 @@
         font-weight: normal;
         font-style: normal;
     }
+    // @font-face {
+    //       font-family: 'youshe';
+    //       src: url('./assets/youshe.ttf');
+    //       src:
+    //         // url('./assets/youshe.eot?#font-spider') format('embedded-opentype'),
+    //         // url('./assets/youshe.woff2') format('woff2'),
+    //         // url('./assets/youshe.woff') format('woff'),
+    //         url('./assets/youshe.ttf') format('truetype');
+    //         // url('./assets/youshe.svg') format('svg');
+    //       font-weight: normal;
+    //       font-style: normal;
+    // }
 
     #app {
         font-family: ziti;

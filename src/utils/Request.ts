@@ -11,16 +11,20 @@ function getResData(res: any): {
 } {
     //在这里对错误的返回进行统一处理
     if(res.code == 1) {
+        notice.Success('提交成功')
+        setTimeout(() => {
+            window.location.href = 'http://recruit.qgailab.com/'
+        }, 2000)
         return {
             isSuccess: true,
             data: res.data,
-            message: res.message
+            message: res.msg
         }
     } else {
-        notice.ErrorNotice(res.message)
+        notice.ErrorNotice(res.msg)
         return {
             isSuccess: false,
-            message: res.message
+            message: res.msg
         }
     }
 }
