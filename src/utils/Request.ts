@@ -21,7 +21,11 @@ function getResData(res: any): {
             message: res.msg
         }
     } else {
-        notice.ErrorNotice(res.msg)
+        if(res.msg === '该学号已经报名，不可重复报名') {
+            notice.ErrorNotice('您的报名信息已存在，如果不是您本人操作，或者需要修改报名信息，请及时联系工作室')
+        } else {
+            notice.ErrorNotice(res.msg)
+        }
         return {
             isSuccess: false,
             message: res.msg

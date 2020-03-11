@@ -269,7 +269,7 @@
                     </Radio>
                 </RadioGroup>
                 <div style="font-size:14px;margin-top: 0.5rem;font-family:Source Han Sans CN;">
-                    *设计组与其他六个方向的流程不同，笔试时除了黑色的签字笔请另外带上铅笔和橡皮擦。
+                    *设计组与其他六个方向的流程不同，请有意面试设计组的同学加入Q群：1046164942。
                 </div>
                 <div style="font-size: 14px;font-family:Source Han Sans CN;">*7个方向只能填写一个。</div>
                 <div class="warning">{{this.warning.direction}}</div>
